@@ -1,0 +1,6 @@
+1. Spend a bit more time on the demo.
+2. What does the .sk file format look like? Spend a little more time on it.
+3. More vision and approach at the beginning.
+4. More future work at the end.
+5. How does the end-host stack communicate remaining flow size to the scheduler using a TCP-like scheduling stack?
+6. Why was the programmable scheduler hard?
