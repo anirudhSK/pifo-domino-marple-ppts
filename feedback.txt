@@ -4,3 +4,8 @@
 4. More future work at the end.
 5. How does the end-host stack communicate remaining flow size to the scheduler using a TCP-like scheduling stack?
 6. Why was the programmable scheduler hard?
+7. Why is programmable scheduling important?
+8. Avoid the term overhead. People seem to interpret it as: you take out a lot
+of existing stuff, you add back a lot of new stuff. new - existing = overhead. I
+n reality, we only need a little bit of additional stuff; we don't need to overh
+al the old stuff, which is what overhead seems to imply.
