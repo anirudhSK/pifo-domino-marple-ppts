@@ -2,10 +2,11 @@
 2. What does the .sk file format look like? Spend a little more time on it.
 3. More vision and approach at the beginning.
 4. More future work at the end.
-5. How does the end-host stack communicate remaining flow size to the scheduler using a TCP-like scheduling stack?
-6. Why was the programmable scheduler hard?
-7. Why is programmable scheduling important?
 8. Avoid the term overhead. People seem to interpret it as: you take out a lot
 of existing stuff, you add back a lot of new stuff. new - existing = overhead. I
 n reality, we only need a little bit of additional stuff; we don't need to overh
 al the old stuff, which is what overhead seems to imply.
+9. Differentiate against FPGA-based high-level synthesis: target LUTs, not atoms,
+much more fine grained, can do anything at the cost of lower performance.
+10. What about an architecture with accelerators: It's a possibility, but we don't
+know exactly what accelerators we will need.
