@@ -1,0 +1,25 @@
+Domino in three slides:
+
+Slide 1: The problem
+============
+--> So we have these pieces of code (scheduling, queue management, cong ctrl)
+    we want to run at high speed (1 billion times a second).
+--> What's the obvious choice?
+      : multi-core processor with locks for state.
+        Only 100 M times a second on multiple cores.
+      : Why so slow? Multi-porting.
+      : Also locks lead to non-determinism.
+--> What about a different architecture? 
+      : Forbid sharing
+      : Feed-forward deterministic pipeline with ALUs at each stage.
+
+Slide 2: Challenges
+=============
+--> Impedence mismatch between user's code and hardware's pipeline
+      : How do we bridge the gap?
+
+Slide 3: What's in the compiler?
+=============
+--> Key insight: Strongly Connected Components + SKETCH
+
+(Maybe remove the term packet transactions and atom altogether.)
