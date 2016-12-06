@@ -1,18 +1,27 @@
+Sidenote:
+============
+Maybe we can remove parser+match-action-pipeline+scheduler diagram from the
+beginning of the talk. It's kind of distracting to be honest.
+
 Domino in three slides:
 
 Slide 1: The problem
 ============
 --> So we have these pieces of code (scheduling, queue management, cong ctrl)
-    we want to run at high speed (1 billion times a second).
+we want to run at high speed (1 billion times a second).
 
 --> Question: what instructions/primitives do we need for high-speed execution?
---> Solution: Need a compiler to go from code to router config.
+--> Answer: Need a compiler to go from code to shared-nothing router pipeline.
 
 Block diag of compiler: (my flashing animation)
 Input: Description of architecture and code
 Output: Does it map? What's the mapping?
 Iterative procedure, much like the early days of RISC.
 Allows us to explore different instruction sets and see what works best.
+
+Why do we need our own new compiler?
+Answer: This isn't like a standard multi-core processor: no memory sharing,
+no locks, deterministic, worst-case guarantees.
 
 Slide 2: What we built (animate on the block diagram from previous page)
 ============
@@ -28,14 +37,3 @@ Slide 4: What we learned (catalog of instruction set to algorithm mappings)
 2. Counter => Heavy hitters
 A few more.
 Say all instrs are feasible today.
-
-Slide 2: Challenges
-=============
---> Impedence mismatch between user's code and hardware's pipeline
-      : How do we bridge the gap?
-
-Slide 3: What's in the compiler?
-=============
---> Key insight: Strongly Connected Components + SKETCH
-
-(Maybe remove the term packet transactions and atom altogether.)
