@@ -4,14 +4,30 @@ Slide 1: The problem
 ============
 --> So we have these pieces of code (scheduling, queue management, cong ctrl)
     we want to run at high speed (1 billion times a second).
---> What's the obvious choice?
-      : multi-core processor with locks for state.
-        Only 100 M times a second on multiple cores.
-      : Why so slow? Multi-porting.
-      : Also locks lead to non-determinism.
---> What about a different architecture? 
-      : Forbid sharing
-      : Feed-forward deterministic pipeline with ALUs at each stage.
+
+--> Question: what instructions/primitives do we need for high-speed execution?
+--> Solution: Need a compiler to go from code to router config.
+
+Block diag of compiler: (my flashing animation)
+Input: Description of architecture and code
+Output: Does it map? What's the mapping?
+Iterative procedure, much like the early days of RISC.
+Allows us to explore different instruction sets and see what works best.
+
+Slide 2: What we built (animate on the block diagram from previous page)
+============
+1. A language for writing the algorithms.
+2. A model for the target architecture.
+3. A compiler to go between them.
+
+Next few slides: Describe each of 1--3 in as much detail as you want.
+
+Slide 4: What we learned (catalog of instruction set to algorithm mappings)
+===========
+1. Test and set => bloom filter.
+2. Counter => Heavy hitters
+A few more.
+Say all instrs are feasible today.
 
 Slide 2: Challenges
 =============
