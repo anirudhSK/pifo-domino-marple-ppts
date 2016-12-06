@@ -1,0 +1,31 @@
+Slide 1: The problem
+============
+--> We have these pieces of code (scheduling, queue management, cong ctrl) we
+want to run at high speed (1 billion times a second).
+
+--> Question: what instructions/primitives do we need for these algorithms?
+
+Slide 2: The challenge
+============
+* Hardware is pipelined.
+* Algorithms are written in a different language.
+* Need a compiler to bridge the gap from code to instructions.
+--> Allows us to run thought experiments with different instructions and different algorithms.
+
+Block diag of compiler: (my flashing animation)
+1. A language for writing the algorithms.
+2. A language / model for the target architecture.
+Stress that this isn't like a standard multi-core processor: no memory sharing,
+no locks, deterministic, worst-case guarantees.
+3. A compiler to go between them.
+
+Compiler aids in an iterative design process
+Next few slides: Describe each of 1--3 in as much detail as you want.
+
+Slide 3: What we learned
+(catalog of instruction set to algorithm mappings)
+===========
+1. Test and set => bloom filter.
+2. Counter => Heavy hitters
+A few more.
+Say all instrs are feasible today.
