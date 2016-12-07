@@ -1,38 +1,64 @@
 Slide 1: The problem
 ============
---> We have these algorithms (scheduling, queue management, cong ctrl) we want
-to run at high speed (1 billion times a second).
+--> Given: algorithms that need to run 1B times/sec.
+--> Question: what *reusable* primitives do we need for these algorithms?
+(The interesting problem isn't a compiler)
 
---> Question: what instructions/primitives do we need for these algorithms?
-
-Slide 2: How we answer this question: a compiler.
+Slide 2: A tool to extracts patterns from algorithms.
 ============
-Pane at the top:
+First, pane at the top:
 ------------------
 
-* Hardware is pipelined.
-* Algorithms are written in a different language.
-* Need a compiler to bridge the gap from code to instructions.
---> Then, we can run thought experiments with different instructions.
+* The underlying hardware is pipelined.
 
-Block diag of compiler:
-1. Left: Language for writing the algorithms. (cartoon of scroll with algorithm)
-2. Left: A model for the target architecture. (cartoon of pipeline)
-* Stress this isn't a standard multi-core processor:
+(speak about how
+  this isn't a standard multi-core processor:
   no memory sharing,
   no locks, deterministic, worst-case guarantees.
   very stripped down
-3. Middle: A compiler to go between them (a big circle in the middle)
-2 arrows coming out of compiler: maps or doesn't map.
+)
 
-Pane at the bottom:
-Compiler aids in an iterative design process
-Next few slides: Describe each of 1--3 in as much detail as you want.
+--> so what part of the algorithm runs in each stage of the pipeline?
+--> can we pipeline the algorithm into reusable primitives?
 
-Slide 3: What we learned
+What we built: A tool (could use the term compiler) to pipeline algorithms
+1. Input: Algorithms written in a DSL (briefly describe DSL).
+(cartoon of scroll with algorithm)
+
+2. Output: Codelets in a maximally pipelined implementation.
+(cartoon of sampling's pipeline).
+
+Slide 3: how the tool works?
+===========
+Strongly connected components.
+Bring out the stateless/stateful distinction here.
+
+Slide 4: What we learned
 (catalog of instruction set to algorithm mappings)
 ===========
-1. Test and set => bloom filter.
-2. Counter => Heavy hitters
-A few more.
-Say all instrs are feasible today.
+0. pairwise stateless operations => all stateless operations we saw.
+1. Test and set => bloom filter, indicator variables (did I see a SYN?)
+2. Counter => Heavy hitters, other count-based algorithms.
+3. 2-way predicated increments => RCP, flowlet switching, sampling.
+4. Paired-wise updates => CONGA (a load-balancing algorithm)
+5. Maybe? (lookup table) for CoDel's square root?
+
+Even if you built a circuit that incorporated all of these elements,
+it's less than a few percent in area.
+
+Future work: Do these instructions generalize? Can we formulate this as a ML
+problem? We only picked ten algorithms here.
+
+Potential questions:
+------
+Q1. Why use a compiler?
+Ans: Beyond a few lines, I can't reason manually. It's always good to have
+someone check your work. It takes much longer and much more ingenuity to do it
+manually (Steve Licking).
+
+Q2. Other parts of the compiler 
+
+SKETCH is no longer important when the compiler is used as a tool.
+Maybe don't even need critical path scheduling.
+Because we are identifying patterns here, not deciding how many of each we
+need.
