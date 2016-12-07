@@ -1,24 +1,31 @@
 Slide 1: The problem
 ============
---> We have these pieces of code (scheduling, queue management, cong ctrl) we
-want to run at high speed (1 billion times a second).
+--> We have these algorithms (scheduling, queue management, cong ctrl) we want
+to run at high speed (1 billion times a second).
 
 --> Question: what instructions/primitives do we need for these algorithms?
 
-Slide 2: The challenge
+Slide 2: How we answer this question: a compiler.
 ============
+Pane at the top:
+------------------
+
 * Hardware is pipelined.
 * Algorithms are written in a different language.
 * Need a compiler to bridge the gap from code to instructions.
---> Allows us to run thought experiments with different instructions and different algorithms.
+--> Then, we can run thought experiments with different instructions.
 
-Block diag of compiler: (my flashing animation)
-1. A language for writing the algorithms.
-2. A language / model for the target architecture.
-Stress that this isn't like a standard multi-core processor: no memory sharing,
-no locks, deterministic, worst-case guarantees.
-3. A compiler to go between them.
+Block diag of compiler:
+1. Left: Language for writing the algorithms. (cartoon of scroll with algorithm)
+2. Left: A model for the target architecture. (cartoon of pipeline)
+* Stress this isn't a standard multi-core processor:
+  no memory sharing,
+  no locks, deterministic, worst-case guarantees.
+  very stripped down
+3. Middle: A compiler to go between them (a big circle in the middle)
+2 arrows coming out of compiler: maps or doesn't map.
 
+Pane at the bottom:
 Compiler aids in an iterative design process
 Next few slides: Describe each of 1--3 in as much detail as you want.
 
