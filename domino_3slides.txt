@@ -1,17 +1,17 @@
 Slide 1: The problem
 ============
 --> Given: algorithms that need to run 1B times/sec.
---> Question: what *reusable* primitives do we need for these algorithms?
-(The interesting problem isn't a compiler)
+--> Question: what *reusable* primitives/instructions do we need for these
+algorithms?
 
-Slide 2: A tool to extracts patterns from algorithms.
+Slide 2: A tool to extract reusable primitives from algorithms.
 ============
-First, pane at the top:
+First, need to understand the hardware:
 ------------------
 
 * The underlying hardware is pipelined.
 
-(speak about how
+(comment about how
   this isn't a standard multi-core processor:
   no memory sharing,
   no locks, deterministic, worst-case guarantees.
@@ -21,40 +21,44 @@ First, pane at the top:
 --> so what part of the algorithm runs in each stage of the pipeline?
 --> can we pipeline the algorithm into reusable primitives?
 
-What we built: A tool (could use the term compiler) to pipeline algorithms
+Next, input-ouput description of what we built:
+A tool (could use the term compiler) to pipeline algorithms
 1. Input: Algorithms written in a DSL (briefly describe DSL).
 (cartoon of scroll with algorithm)
 
 2. Output: Codelets in a maximally pipelined implementation.
 (cartoon of sampling's pipeline).
 
+Now, by mining these codelets across algorithms we can extract general reusable
+primitives.
+
 Slide 3: how the tool works?
 ===========
 Strongly connected components.
 Bring out the stateless/stateful distinction here.
 
-Slide 4: What we learned
-(catalog of instruction set to algorithm mappings)
+Slide 4: A catalog of reusable primitives
 ===========
 0. pairwise stateless operations => all stateless operations we saw.
-1. Test and set => bloom filter, indicator variables (did I see a SYN?)
+1. Test and set => bloom filter, indicator variables (e.g., did I see a SYN?)
 2. Counter => Heavy hitters, other count-based algorithms.
 3. 2-way predicated increments => RCP, flowlet switching, sampling.
-4. Paired-wise updates => CONGA (a load-balancing algorithm)
+4. Pair-wise updates => CONGA (a load-balancing algorithm)
 5. Maybe? (lookup table) for CoDel's square root?
 
-Even if you built a circuit that incorporated all of these elements,
+Conclude with: If you built a circuit that incorporated ALL of these elements,
 it's less than a few percent in area.
 
-Future work: Do these instructions generalize? Can we formulate this as a ML
-problem? We only picked ten algorithms here.
+Caveat/Future work:
+Do these instructions generalize? Can we formulate this as a ML problem? We
+only picked ten algorithms here.
 
 Potential questions:
 ------
 Q1. Why use a compiler?
 Ans: Beyond a few lines, I can't reason manually. It's always good to have
 someone check your work. It takes much longer and much more ingenuity to do it
-manually (Steve Licking).
+manually.
 
 Q2. Other parts of the compiler 
 
