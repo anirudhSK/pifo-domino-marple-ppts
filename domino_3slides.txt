@@ -3,6 +3,21 @@ Slide 1: The problem
 --> Given: algorithms that need to run 1B times/sec.
 --> Question: what *reusable* primitives/instructions do we need for these
 algorithms?
+(This could be an overall narrative: what is the RISC equivalent for a programmable
+router data plane. I am going to decompose this problem of determining a RISC equivalent
+for the pipelines and for the scheduler.
+For scheduling, it's the PIFO. Sticking something in the PIFO is an instruction
+For pipelines, it's these counters, test/set, if-else etc.)
+Change atom to instruction.
+Otherwise, teach the audience why it's an atom and not an instruction.
+Make sure everyone understand that there's something new.
+Highlight differences from x86 for a computer architect.
+No longer are we claiming there's a new language and we have converted it down.
+I am interested in building tools like Domino to work with industry to convert into good ideas.)
+
+Do the first five minutes of the talk with Hari and Mohammad with outline etc.
+Hari doesn't think the performance queries part is required.
+Hari thinks more than two is hard if the two are technically deep.
 
 Slide 2: A tool to extract reusable primitives from algorithms.
 ============
@@ -21,28 +36,35 @@ First, need to understand the hardware:
 --> so what part of the algorithm runs in each stage of the pipeline?
 --> can we pipeline the algorithm into reusable primitives?
 
-Next, input-ouput description of what we built:
+Next, input-output description of what we built:
 A tool (could use the term compiler) to pipeline algorithms
 1. Input: Algorithms written in a DSL (briefly describe DSL).
+DSL's core abstraction is a packet transaction.
+Explain why you need it (insulates you from the parallelism of the hw).
+(Try and weave in packet transactions here as part of the DSL's semantics).
 (cartoon of scroll with algorithm)
 
 2. Output: Codelets in a maximally pipelined implementation.
 (cartoon of sampling's pipeline).
+
+(Demo Cmdline shouldn't have the depth and width of the pipeline)
 
 Now, by mining these codelets across algorithms we can extract general reusable
 primitives.
 
 Slide 3: how the tool works?
 ===========
-Strongly connected components.
+Strongly connected components (inspired by Lam's work from 1988,
+but differences are such and such).
 Bring out the stateless/stateful distinction here.
 
 Slide 4: A catalog of reusable primitives
 ===========
 0. pairwise stateless operations => all stateless operations we saw.
-1. Test and set => bloom filter, indicator variables (e.g., did I see a SYN?)
+1. Test and set (R/W) => bloom filter, indicator variables (e.g., did I see a SYN?)
 2. Counter => Heavy hitters, other count-based algorithms.
 3. 2-way predicated increments => RCP, flowlet switching, sampling.
+Maybe add the nested instruction as well.
 4. Pair-wise updates => CONGA (a load-balancing algorithm)
 5. Maybe? (lookup table) for CoDel's square root?
 
