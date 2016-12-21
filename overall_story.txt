@@ -13,5 +13,6 @@ router?
    --> Use this to introduce the pipeline as well.
 
 6. Here we answer this question for two specific classes of router
-functionality: stateful data-plane algorithms and scheduling. If there's time,
-I'll get into measurement.
+functionality: scheduling and stateful data-plane algorithms.
+If there's time, I'll get into measurement.
+(Try doing PIFO before Domino. It's a simpler idea to explain.)
