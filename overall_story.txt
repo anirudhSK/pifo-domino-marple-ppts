@@ -1,0 +1,17 @@
+1. Motivate why we need programmability.
+
+2. Where we fell short: we either had programmability or performance, not both.
+
+3. The vision: programmability + performance, i.e., no compromise.
+
+4. Concrete question: what's the instruction set or RISC for this programmable
+router?
+
+5. But why bother? Why not use x86 instructions?
+   --> Variable latency is at odds with determinism.
+   --> Too general and expensive for our purpose.
+   --> Use this to introduce the pipeline as well.
+
+6. Here we answer this question for two specific classes of router
+functionality: stateful data-plane algorithms and scheduling. If there's time,
+I'll get into measurement.
