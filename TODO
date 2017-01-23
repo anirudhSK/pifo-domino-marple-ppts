@@ -1,4 +1,5 @@
 1. Maybe add a slide on performance queries with merging and such.
 2. Consider removing the containment hierarchy / nesting requirement for atoms.
-It seems to be making the atoms unduly complicated.
+It seems to be making the atoms unduly complicated and
+complicates the explanation of the atoms as well.
 3. Mention P4 in this talk slide (layout prior work).
